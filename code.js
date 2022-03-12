@@ -116,9 +116,9 @@ function game() {
 
     roundNumber = parseInt(prompt("Input number of rounds you want: "));
 
-    // while (isNaN(roundNumber)){
-    //     roundNumber = parseInt(prompt("Input number of rounds you want: "));
-    // }
+    while (isNaN(roundNumber)){
+        roundNumber = parseInt(prompt("Input number of rounds you want: "));
+    }
 
     for (let i = 1; i<=roundNumber;i++){
         console.log("Round = "+i );
