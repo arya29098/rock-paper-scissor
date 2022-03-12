@@ -94,15 +94,18 @@ function playRound() {
     console.log("computer selection is " + numbertoSelection(computerSelection));
 
     if (playerSelection == computerSelection) {
-        console.log(numbertoResult(0))
+        console.log(numbertoResult(0));
+        alert("Draw!");
         return 0;
     }
     else if (playerSelection-computerSelection == 1 || playerSelection-computerSelection == -2) {
         console.log(numbertoResult(1));
+        alert("You Win!");
         return 1;
     }
     else {
         console.log(numbertoResult(2));
+        alert("You Lose!");
         return 2;
     };
 }
@@ -112,6 +115,10 @@ function game() {
     let computerWinCount = 0;
 
     roundNumber = parseInt(prompt("Input number of rounds you want: "));
+
+    while (isNaN(roundNumber)){
+        roundNumber = parseInt(prompt("Input number of rounds you want: "));
+    }
 
     for (let i = 1; i<=roundNumber;i++){
         console.log("Round = "+i );
