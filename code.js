@@ -90,8 +90,7 @@ function playRound() {
     
     let computerSelection = computerPlay();
 
-    console.log("player selection is " + numbertoSelection(playerSelection));
-    console.log("computer selection is " + numbertoSelection(computerSelection));
+    matchevent.innerHTML="computer selection is " + numbertoSelection(computerSelection);
 
     if (playerSelection == computerSelection) {
         console.log(numbertoResult(0));
@@ -110,25 +109,126 @@ function playRound() {
     };
 }
 
-function game() {
-    let playerWinCount = 0;
-    let computerWinCount = 0;
+function playRock() {
+    // paper = 1, scissor = 2, rock = 3
 
-    roundNumber = parseInt(prompt("Input number of rounds you want: "));
+    let playerSelection = 3;
 
-    while (isNaN(roundNumber)){
-        roundNumber = parseInt(prompt("Input number of rounds you want: "));
+    matchevent.innerHTML="You choose " + numbertoSelection(playerSelection);
+
+    let computerSelection = computerPlay();
+
+    matchevent.innerHTML="computer selection is " + numbertoSelection(computerSelection);
+
+    if (playerSelection == computerSelection) {
+        console.log(numbertoResult(0));
+        setTimeout(roundDraw,250);
     }
-
-    for (let i = 1; i<=roundNumber;i++){
-        console.log("Round = "+i );
-        let roundResult = playRound();
-        if (roundResult == 2) {
-            computerWinCount = computerWinCount+1;
-        }
-        else if(roundResult == 1) {
-            playerWinCount = playerWinCount+1;
-        }
-        console.log("Score = you: "+playerWinCount+" - computer: "+computerWinCount);
+    else if (playerSelection-computerSelection == 1 || playerSelection-computerSelection == -2) {
+        console.log(numbertoResult(1));
+        setTimeout(playerWin,250);
     }
+    else {
+        console.log(numbertoResult(2));
+        setTimeout(computerWin,250);
+    };
 }
+
+function playScissor() {
+    // paper = 1, scissor = 2, rock = 3
+
+    let playerSelection = 2;
+
+    matchevent.innerHTML="You choose " + numbertoSelection(playerSelection);
+
+    let computerSelection = computerPlay();
+
+    matchevent.innerHTML="computer selection is " + numbertoSelection(computerSelection);
+
+
+    if (playerSelection == computerSelection) {
+        console.log(numbertoResult(0));
+        setTimeout(roundDraw,250);
+    }
+    else if (playerSelection-computerSelection == 1 || playerSelection-computerSelection == -2) {
+        console.log(numbertoResult(1));
+        setTimeout(playerWin,250);
+    }
+    else {
+        console.log(numbertoResult(2));
+        setTimeout(computerWin,250);
+    };
+}
+
+function playPaper() {
+    // paper = 1, scissor = 2, rock = 3
+    let playerSelection = 1;
+
+    matchevent.innerHTML="You choose " + numbertoSelection(playerSelection);
+
+    let computerSelection = computerPlay();
+
+    matchevent.innerHTML="computer selection is " + numbertoSelection(computerSelection);
+
+    if (playerSelection == computerSelection) {
+        console.log(numbertoResult(0));
+        setTimeout(roundDraw,250);
+    }
+    else if (playerSelection-computerSelection == 1 || playerSelection-computerSelection == -2) {
+        console.log(numbertoResult(1));
+        setTimeout(playerWin,250);
+    }
+    else {
+        console.log(numbertoResult(2));
+        setTimeout(computerWin,250);
+    };
+}
+
+function playerWin(){
+    playerWinCount = playerWinCount+1;
+    playerscoreboard.innerHTML="You - "+playerWinCount;
+    matchevent.innerHTML="you win this round!";
+}
+
+function roundDraw(){
+    matchevent.innerHTML="Draw";
+}
+
+function computerWin(){
+    computerWinCount = computerWinCount+1;
+    computerscoreboard.innerHTML="Computer - "+computerWinCount;
+    matchevent.innerHTML="computer win this round!";
+}
+
+function testEvent(){
+    console.log("Function Executed")
+}
+
+let playerWinCount = 0;
+let computerWinCount = 0;
+let roundResult = 0;
+
+const playerscoreboard = document.getElementById("player-score");
+const computerscoreboard = document.getElementById("computer-score");
+
+const matchevent = document.getElementById("match-event");
+
+const rockbutton = document.getElementById("rock-button");
+const paperbutton = document.getElementById("paper-button");
+const scissorbutton = document.getElementById("scissor-button");
+
+playerscoreboard.innerHTML="You - "+playerWinCount;
+computerscoreboard.innerHTML="Computer - "+computerWinCount;
+
+matchevent.innerHTML="Select Rock / Paper / Scissor";
+
+rockbutton.addEventListener("click",playRock);
+paperbutton.addEventListener("click",playPaper);
+scissorbutton.addEventListener("click",playScissor);
+
+// When index is initalized, run function game
+// Scoreboard to show current function game state
+// Player make selection, using UI
+// Play game(s), update gamestate + scoreboard
+// After game finished, prompt to play
+
